@@ -35,11 +35,14 @@
         method: "GET"
       }).done(function(response) {
         var results = response.data;
-        // for loop that adds properties 
+
         for(var i = 0; i < results.length; i++) {
           var countryDiv = $("<div class='gifsDiv'>");
-          var countryImage = $("<img class='gif'>");
-          countryImage.attr("src",results[i].images.fixed_height.url);
+          var countryImage = $("<img class = 'gif'>");
+              countryImage.attr("src",results[i].images.fixed_height.url);
+              countryImage.attr("data-still", results[i].images.fixed_height_still.url)
+              countryImage.attr("data-state", "still");
+              countryImage.attr("data-animate",results[i].images.fixed_height.url);
           // var p = $("<p>").text("Rating: " + results[i].rating);
 
           // countryDiv.append(p);
@@ -48,6 +51,18 @@
         }
       });
     };
+
+    // simulates animating gifs
+    $(document).on("click", ".gif", function() {
+      var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "data-animate");
+      } else {
+        $(this).attri("src", $(this).attr("data-still"));
+        $(this).attr("data-state","data-still");
+      }
+    });
 
     // calling functions
     $(document).on("click", ".country", displayCountryGifs);
