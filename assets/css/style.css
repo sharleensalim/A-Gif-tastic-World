@@ -2,13 +2,19 @@ body {
 	background: url("../../images/giftastic.png");
 	background-size: 100%;
 	text-align: center;
-	margin: 30px;
-
 }
 
 h1 {
 	font-family: lobster;
 	font-size: 40px;
+	padding-top: 30px;
+}
+
+h2 {
+	font-family: helvetica;
+	font-size: 16px;
+	font-style: italic;
+	margin-top: 15px;
 }
 
 p {
@@ -16,6 +22,7 @@ p {
 	font-style: italic;
 	font-size: 12px;
 	padding: 10px;
+	position: relative;
 }
 
 #country-form {
@@ -26,7 +33,11 @@ p {
 	font-family: helvetica;
 	font-size: 12px;
 	font-style: italic;
-	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10px;
 	background-color: white;
 }
 

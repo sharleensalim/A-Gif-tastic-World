@@ -27,7 +27,7 @@
     // function that re-renders HTML to display gifs
     function displayCountryGifs() {
       var country = $(this).attr("data-name");
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + country + "&api_key=dc6zaTOxFJmzC&limit=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + country + "&api_key=dc6zaTOxFJmzC&limit=10";
 
       // AJAX call for country button that is being clicked
       $.ajax({
@@ -37,32 +37,40 @@
         var results = response.data;
 
         for(var i = 0; i < results.length; i++) {
+
           var countryDiv = $("<div class='gifsDiv'>");
           var countryImage = $("<img class = 'gif'>");
-              countryImage.attr("src",results[i].images.fixed_height.url);
-              countryImage.attr("data-still", results[i].images.fixed_height_still.url)
+
+          var gifRating = results[i].rating;
+          // var p = $("<p>").text("Rating: " + gifRating);
+          // rating is shown on hover 
+              countryImage.attr('title', "Rating: " + gifRating);
+
+          var gifStill = results[i].images.fixed_height_still.url;
+          var gifPlay = results[i].images.fixed_height.url;
+              countryImage.attr("src", gifStill);
+              countryImage.attr("data-still", gifStill);
+              countryImage.attr("data-animate", gifPlay);
               countryImage.attr("data-state", "still");
-              countryImage.attr("data-animate",results[i].images.fixed_height.url);
-          // var p = $("<p>").text("Rating: " + results[i].rating);
 
           // countryDiv.append(p);
           countryDiv.append(countryImage);
           $("#gifs-appear-here").prepend(countryDiv);
         }
-      });
-    };
 
-    // simulates animating gifs
-    $(document).on("click", ".gif", function() {
-      var state = $(this).attr("data-state");
-      if (state === "still") {
-        $(this).attr("src", $(this).attr("data-animate"));
-        $(this).attr("data-state", "data-animate");
-      } else {
-        $(this).attri("src", $(this).attr("data-still"));
-        $(this).attr("data-state","data-still");
-      }
-    });
+        // pausing gifs
+        $(document).on("click", ".gif", function() {
+          var state = $(this).attr("data-state");
+          if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "data-animate");
+          } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state","still");
+          }
+        });
+      });
+    }
 
     // calling functions
     $(document).on("click", ".country", displayCountryGifs);
