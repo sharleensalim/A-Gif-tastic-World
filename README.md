@@ -11,5 +11,5 @@ https://sharleensalim.github.io/Week-6-GifTastic/
 * JQuery
 * AJAX
 
-Acknowledgments
+## Acknowledgments
 * Thank you Giphy for your fun API :) 
