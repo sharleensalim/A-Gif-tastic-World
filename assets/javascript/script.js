@@ -36,6 +36,7 @@
       }).done(function(response) {
         var results = response.data;
 
+        $("#gifs-appear-here").empty();
         for(var i = 0; i < results.length; i++) {
 
           var countryDiv = $("<div class='gifsDiv'>");
@@ -73,8 +74,9 @@
     }
 
     // calling functions
+    renderButtons();
     $(document).on("click", ".country", displayCountryGifs);
-  	renderButtons();
+          
 
 
 
